@@ -1,0 +1,39 @@
+Index: source/meson.build
+===================================================================
+--- source.orig/meson.build
++++ source/meson.build
+@@ -29,23 +29,8 @@ if confdir == ''
+ endif
+ username = get_option('username')
+ 
+-systemunitdir = get_option('systemunitdir')
+-sysusersdir = get_option('sysusersdir')
+-if get_option('systemd') and systemd.found()
+-  if systemunitdir == ''
+-    systemunitdir = systemd.get_variable(pkgconfig: 'systemdsystemunitdir')
+-  endif
+-  if systemunitdir == ''
+-    error('Couldn\'t determine systemd system unit directory.')
+-  endif
+-
+-  if sysusersdir == ''
+-    sysusersdir = systemd.get_variable(pkgconfig: 'sysusersdir')
+-  endif
+-  if sysusersdir == ''
+-    error('Couldn\'t determine systemd sysusers directory.')
+-  endif
+-endif
++systemunitdir = prefix / 'lib/systemd/system'
++sysusersdir = prefix / 'lib/sysusers.d'
+ 
+ conf_data = configuration_data()
+ conf_data.set_quoted('PROJECT_VERSION', meson.project_version())
+@@ -77,8 +62,3 @@ if systemd.found()
+     'username': username
+   }, section: 'Confiuration')
+ endif
+-
+-meson.add_install_script(
+-  'meson_post_install.sh',
+-  skip_if_destdir: true
+-)
