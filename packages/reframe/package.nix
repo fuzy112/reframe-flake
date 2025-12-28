@@ -11,7 +11,12 @@
   meson,
   pkg-config,
   ninja,
-  gcc
+  gcc,
+  withNeatvnc ? true,
+  neatvnc,
+  aml,
+  cmake,
+  pixman,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -39,6 +44,15 @@ stdenv.mkDerivation (finalAttrs: {
     libvncserver
     libxkbcommon
     systemd
+  ] ++ lib.optionals withNeatvnc [
+    neatvnc
+    aml
+    cmake
+    pixman
+  ];
+
+  mesonFlags = lib.optionals withNeatvnc [
+    "-Dneatvnc=true"
   ];
 
   patches = [
