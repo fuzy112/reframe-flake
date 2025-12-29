@@ -18,5 +18,6 @@
       overlays.reframe = self: super: import ./packages { pkgs = self; };
       overlays.default = self.overlays.reframe;
       nixosModules.reframe = ./modules/services/monitoring/reframe.nix;
+      nixosModules.default = self.nixosModules.reframe;
     };
 }
