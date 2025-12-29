@@ -22,6 +22,7 @@
 stdenv.mkDerivation (finalAttrs: {
   pname = "reframe";
   version = "1.6.0";
+  name = "${finalAttrs.pname}-${finalAttrs.version}";
   src = fetchFromGitHub {
     owner = "AlynxZhou";
     repo = "reframe";
@@ -54,6 +55,14 @@ stdenv.mkDerivation (finalAttrs: {
   mesonFlags = lib.optionals withNeatvnc [
     "-Dneatvnc=true"
   ];
+
+  postInstall = ''
+    mkdir -p $out/share/${finalAttrs.name}
+    mkdir -p $out/share/${finalAttrs.name}/docs
+    cd $src
+    cp README.md LICENSE $out/share/${finalAttrs.name}
+    cp -r docs/*.html docs/css docs/images $out/share/${finalAttrs.name}/docs
+  '';
 
   patches = [
     ./fix-paths.patch
