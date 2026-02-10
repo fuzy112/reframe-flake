@@ -14,7 +14,12 @@
       forAllSystems = f: nixpkgs.lib.genAttrs allSystems (system: f (nixpkgs.legacyPackages.${system}));
     in
     {
-      packages = forAllSystems (pkgs: import ./packages { inherit pkgs; });
+      packages = forAllSystems (
+        pkgs:
+        import ./packages {
+          inherit pkgs;
+        }
+      );
       overlays.reframe = self: super: import ./packages { pkgs = self; };
       overlays.default = self.overlays.reframe;
       nixosModules.reframe = ./modules/services/monitoring/reframe.nix;

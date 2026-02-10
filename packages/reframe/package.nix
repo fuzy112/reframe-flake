@@ -22,14 +22,14 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "reframe";
-  version = "1.9.0";
+  version = "1.10.6";
   name = "${finalAttrs.pname}-${finalAttrs.version}";
   src = fetchFromGitHub {
     owner = "AlynxZhou";
     repo = "reframe";
     tag = "v${finalAttrs.version}";
     fetchSubmodules = true;
-    hash = "sha256-10eCw2frhiFTzikYunrlzkXO6QvtSInxz9m5wbJJfY8=";
+    hash = "sha256-BKoojvFcK6BzBhbGC1l9bRYx08pfiJ8IWQvy+LeeZSg=";
   };
 
   nativeBuildInputs = [
@@ -47,7 +47,8 @@ stdenv.mkDerivation (finalAttrs: {
     libvncserver
     libxkbcommon
     systemd
-  ] ++ lib.optionals withNeatvnc [
+  ]
+  ++ lib.optionals withNeatvnc [
     neatvnc
     aml
     cmake
