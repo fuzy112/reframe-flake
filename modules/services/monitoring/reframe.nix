@@ -99,6 +99,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = [ cfg.package ];
+
     # Install systemd service and socket files from the package
     systemd.packages = [ cfg.package ];
 
