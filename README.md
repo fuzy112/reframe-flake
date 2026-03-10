@@ -1,6 +1,6 @@
 # reframe-flake
 
-A NixOS module for ReFrame v1.10.6 - A VNC server for DRM/KMS Linux systems.
+A NixOS module for ReFrame - A VNC server for DRM/KMS Linux systems.
 
 ## Features
 
@@ -8,8 +8,8 @@ A NixOS module for ReFrame v1.10.6 - A VNC server for DRM/KMS Linux systems.
 - Multiple instance support
 - Support for both libvncserver and neatvnc backends
 - Multi-monitor support
-- Runtime plugin architecture (v1.10.6+)
-- Improved authentication and security (v1.9.0+)
+- Runtime plugin architecture
+- Improved authentication and security
 
 ## Installation
 
@@ -167,14 +167,6 @@ cat /sys/class/drm/card0-HDMI-A-1/status
 - The streamer service runs as root to access DRM devices
 - The server service runs as the `reframe` system user
 - Socket files use `0660` permissions with `reframe` group ownership
-
-## Upgrading from v1.9.0
-
-Version 1.10.6 includes:
-- Runtime plugin loading for VNC implementations
-- Improved performance with direct buffer usage
-- Better ARM architecture support
-- Updated signal handling and error recovery
 
 ## License
 
