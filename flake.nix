@@ -16,13 +16,18 @@
     {
       packages = forAllSystems (
         pkgs:
-        import ./packages {
-          inherit pkgs;
+        let
+          extendedPkgs = pkgs.extend self.overlays.default;
+        in
+        {
+          inherit (extendedPkgs) reframe;
+          default = extendedPkgs.reframe;
         }
       );
-      overlays.reframe = self: super: import ./packages { pkgs = self; };
+      overlays.reframe = self: super: import ./packages self super;
       overlays.default = self.overlays.reframe;
       nixosModules.reframe = ./modules/services/monitoring/reframe.nix;
       nixosModules.default = self.nixosModules.reframe;
+      formatter = forAllSystems (pkgs: pkgs.nixfmt);
     };
 }
