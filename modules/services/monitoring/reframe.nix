@@ -121,7 +121,7 @@ in
       { name, settings, ... }:
       lib.nameValuePair "reframe/${name}.conf" {
         source = settingsFormat.generate "${name}.conf" settings;
-        mode = "0750";
+        mode = "0640";
         user = "root";
         group = "reframe";
       }

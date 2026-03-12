@@ -70,4 +70,9 @@ stdenv.mkDerivation (finalAttrs: {
   patches = [
     ./fix-paths.patch
   ];
+
+  postPatch = ''
+    substituteInPlace dists/reframe-server@.service.in dists/reframe-streamer@.service.in \
+      --replace-fail "@confdir@" "/etc/reframe"
+  '';
 })
