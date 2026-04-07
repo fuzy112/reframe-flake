@@ -21,9 +21,11 @@ let
           default = config._module.args.name;
         };
 
-        enable = lib.mkEnableOption ''
+        enable = (lib.mkEnableOption ''
           Enable this reframe server instance.
-        '';
+        '') // {
+          default = true;
+        };
 
         settings = lib.mkOption {
           type = settingsFormat.type;
@@ -134,6 +136,7 @@ in
       lib.nameValuePair "reframe-server@${name}" {
         inherit enable;
         overrideStrategy = "asDropin";
+        wantedBy = [ "multi-user.target" ];
       }
     ) cfg.instances;
 
@@ -144,6 +147,7 @@ in
       lib.nameValuePair "reframe@${name}" {
         inherit enable;
         overrideStrategy = "asDropin";
+        wantedBy = [ "sockets.target" ];
       }
     ) cfg.instances;
   };
