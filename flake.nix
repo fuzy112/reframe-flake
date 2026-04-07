@@ -24,7 +24,7 @@
           default = extendedPkgs.reframe;
         }
       );
-      overlays.reframe = self: super: import ./packages self super;
+      overlays.reframe = final: prev: import ./packages final prev;
       overlays.default = self.overlays.reframe;
       nixosModules.reframe = ./modules/services/monitoring/reframe.nix;
       nixosModules.default = self.nixosModules.reframe;
