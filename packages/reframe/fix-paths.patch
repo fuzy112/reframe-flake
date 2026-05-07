@@ -2,12 +2,13 @@ Index: source/meson.build
 ===================================================================
 --- source.orig/meson.build
 +++ source/meson.build
-@@ -29,23 +29,8 @@ if confdir == ''
+@@ -33,31 +33,9 @@ if xdgautostartdir == ''
+   xdgautostartdir = sysconfdir / 'xdg' / 'autostart'
  endif
- username = get_option('username')
  
 -systemunitdir = get_option('systemunitdir')
 -sysusersdir = get_option('sysusersdir')
+-tmpfilesdir = get_option('tmpfilesdir')
 -if get_option('systemd') and systemd.found()
 -  if systemunitdir == ''
 -    systemunitdir = systemd.get_variable(pkgconfig: 'systemdsystemunitdir')
@@ -22,13 +23,21 @@ Index: source/meson.build
 -  if sysusersdir == ''
 -    error('Couldn\'t determine systemd sysusers directory.')
 -  endif
+-
+-  if tmpfilesdir == ''
+-    tmpfilesdir = systemd.get_variable(pkgconfig: 'tmpfilesdir')
+-  endif
+-  if tmpfilesdir == ''
+-    error('Couldn\'t determine systemd tmpfiles directory.')
+-  endif
 -endif
 +systemunitdir = prefix / 'lib/systemd/system'
 +sysusersdir = prefix / 'lib/sysusers.d'
++tmpfilesdir = prefix / 'lib/tmpfiles.d'
  
  conf_data = configuration_data()
  conf_data.set_quoted('PROJECT_VERSION', meson.project_version())
-@@ -77,8 +62,3 @@ if systemd.found()
+@@ -93,8 +71,3 @@ if systemd.found()
      'username': username
    }, section: 'Confiuration')
  endif

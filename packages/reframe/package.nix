@@ -3,6 +3,7 @@
   stdenv,
   fetchFromGitHub,
   glib,
+  gtk4,
   libdrm,
   libepoxy,
   libvncserver,
@@ -21,14 +22,14 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "reframe";
-  version = "1.6.0";
+  version = "1.9.0";
   name = "${finalAttrs.pname}-${finalAttrs.version}";
   src = fetchFromGitHub {
     owner = "AlynxZhou";
     repo = "reframe";
     tag = "v${finalAttrs.version}";
     fetchSubmodules = true;
-    hash = "sha256-5xuc2mz9qihsrFiENb08JsaMfyJcPdcTl2Q9H9BL6o8=";
+    hash = "sha256-10eCw2frhiFTzikYunrlzkXO6QvtSInxz9m5wbJJfY8=";
   };
 
   nativeBuildInputs = [
@@ -40,6 +41,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   buildInputs = [
     glib
+    gtk4
     libdrm
     libepoxy
     libvncserver
