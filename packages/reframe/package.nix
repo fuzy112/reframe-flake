@@ -22,14 +22,14 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "reframe";
-  version = "1.15.1";
+  version = "1.15.2";
   name = "${finalAttrs.pname}-${finalAttrs.version}";
   src = fetchFromGitHub {
     owner = "AlynxZhou";
     repo = "reframe";
     tag = "v${finalAttrs.version}";
     fetchSubmodules = true;
-    hash = "sha256-3ZCLnmu5Idn4RsypJr+JNqIhT13/pq1Xi4wTidUgCqQ=";
+    hash = "sha256-R0l/sXRT+B3mb1SMoX9DLUbFP4lcTK2dVJox8OWwY6Y=";
   };
 
   nativeBuildInputs = [
